@@ -41,7 +41,7 @@ class StringPermutation {
         }
       }
 
-      // found a permutation
+      // found permutation
       if (matches == map.size())
         return true;
 

@@ -5,13 +5,14 @@ using namespace std;
 #include <limits.h>
 #include <vector>
 
-// PROBLEM: Given an array of unsorted numbers and a target number, find a triplet in the array whose sum is 
-// as close to the target number as possible, return the sum of the triplet. If there are more than one such 
-// triplet, return the sum of the triplet with the smallest sum.
+// PROBLEM: Given an array of unsorted numbers and a target number, find a triplet in the array whose sum is as close 
+// to the target number as possible, return the sum of the triplet. If there are more than one such triplet, 
+// return the sum of the triplet with the smallest sum.
 
 // EXAMPLE: Input: [-2, 0, 1, 2], target=2
 //          Output: 1
 //          Explanation: The triplet [-2, 1, 2] has the closest sum to the target.
+
 
 class TripletSumCloseToTarget {
  public:
@@ -19,46 +20,46 @@ class TripletSumCloseToTarget {
     if (arr.empty())
       return -1;
 
-    // to identify and avoid duplicates
-    sort(arr.begin(), arr.end());
-
-    int minDistToTarget = INT_MAX;
-    int sumClosestToTarget = INT_MAX;
+    int dist = INT_MAX;
+    int ans = -1;
 
     for (int i=0; i < arr.size() - 2; i++) {
-      getTripletSum(arr, targetSum, arr[i], i + 1, minDistToTarget, sumClosestToTarget);
+      findTripletSum(arr, targetSum, arr[i], i + 1, dist, ans);
     }
 
-    return sumClosestToTarget;
+    return ans;
   }
 
-private:
-  static void getTripletSum(vector<int>& arr, int targetSum, int value, int left, int &minDistToTarget, 
-    int &sumClosestToTarget) {
-      int right = arr.size() - 1;
+ private:
+  static void findTripletSum(vector<int>& arr, int targetSum, int value, int left, 
+  int& dist, int& ans) {
+    
+    int right = arr.size() - 1;
 
-      while (left < right) {
-        int currSum = value + arr[left] + arr[right];
-
-        // update sum closest to target 
-        int currDist = abs(currSum - targetSum);
-        if (currDist < minDistToTarget) {
-          minDistToTarget = currDist;
-          sumClosestToTarget = currSum;
-        } 
-        else if (currDist == minDistToTarget) {
-          // if dist equal, return smaller sum
-          sumClosestToTarget = min(currSum, sumClosestToTarget);
-        }
-
-        // try to get closer to target sum
-        if (currSum < targetSum)
-          left++;
-        else if (currSum > targetSum)
-          right--;
+    while (left < right) {
+      int curSum = value + arr[left] + arr[right];
+      int curDist = abs(targetSum - curSum);
+      
+      // found new sum closer to targetSum
+      if (curDist < dist) {
+        dist = curDist;
+        ans = curSum;
       }
-    }
+      // if more than 1 triplet with sum close to target, return smaller
+      else if (curDist == dist) {
+        ans = min(ans, curSum);
+      }
 
-    // Time : O(N^2) to iterate thru array and iterate thru subarray to find triplets
-    // Space: O(N) or O(log N) depending on sorting alg
+      // iterate thru subarray
+      if (curSum < targetSum)
+        left++;
+      else if (curSum > targetSum)
+        right--;
+      else
+        break;
+    }
+  } 
+
+  // Time : O(N^2) to iterate thru array and iterate thru subarray to find triplets
+  // Space: O(N) or O(log N) depending on sorting alg
 };

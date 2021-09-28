@@ -28,7 +28,7 @@ class CharacterReplacement {
         map[str[end]] = 0;
       map[str[end]]++;
 
-      // don’t we need to update this count when we shrink the window since we have to replace all the 
+      // don’t need to update this count when we shrink the window since we have to replace all the 
       // remaining letters to get the longest substring having the same letter in any window, we can’t get 
       // a better answer from any other window even though all occurrences of the letter with 
       // frequency maxRepeatLetterCount is not in the current window.
