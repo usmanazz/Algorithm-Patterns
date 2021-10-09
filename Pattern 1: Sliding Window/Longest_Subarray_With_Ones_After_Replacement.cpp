@@ -25,11 +25,9 @@ class ReplacingOnes {
       if (arr[end] == 0)
         replacementsLeft++;
 
-      // went over replacement limit of k, increment start ptr and 
-      // increase replacementsLeft if start points at a 0. 
-      // we only need to shrink the subarray by 1 if we go over limit k
-      // since we're just trying to stay within the limit and avoid 
-      // doing more computations
+      // we're not concerned with having a valid window so it doesn't matter if we shrink the window or not. 
+      // we're only concerned with finding a better answer (a longer window) so we only care about expanding the window 
+      // by one when find a better answer, otherwise we just maintain the current valid size with just a single left++
       if (replacementsLeft > k) {
         if (arr[start] == 0)
           replacementsLeft--;

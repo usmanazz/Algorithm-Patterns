@@ -16,15 +16,15 @@ class RemoveDuplicates {
     if (arr.empty())
       return -1;
 
-    int nextNonDuplicate = 0;
-    for (int i=0; i < arr.size(); i++) {
-      if (arr[nextNonDuplicate - 1] != arr[i]) {
-        arr[nextNonDuplicate] = arr[i];
-        nextNonDuplicate++;
+    int insertIndex = 1;
+    for (int i=1; i < arr.size(); i++) {
+      if (arr[i - 1] != arr[i]) {
+        arr[insertIndex] = arr[i];
+        insertIndex++;
       }
     }
 
-    return nextNonDuplicate;
+    return insertIndex;
   }
 
   // Time: O(n) to iterate thru array
