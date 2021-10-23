@@ -37,10 +37,6 @@ class PathWithGivenSequence {
     if (idx == sequence.size() - 1 && 
       root->left == NULL && root->right == NULL)
       return true;
-    
-    // sequence equal to curr path so far but path has not ended
-    if (sequence[idx] == root->val && idx == sequence.size() - 1 && (root->left || root->right))
-      return false;
 
     return dfs(root->left, sequence, idx + 1) || dfs(root->right, sequence, idx + 1);
   }
