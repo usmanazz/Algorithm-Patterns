@@ -30,14 +30,14 @@ class FindAllTreePaths {
   static void dfs(TreeNode* root, int sum, vector<vector<int>>& ans, vector<int> path) {
     if (root == NULL)
       return;
+      
+    path.push_back(root->val);
 
     if (root->left == NULL && root->right == NULL && (sum - root->val == 0)) {
-      path.push_back(root->val);
       ans.push_back(path);
       return;
     }
 
-    path.push_back(root->val);
     dfs(root->left, sum - root->val, ans, path);
     dfs(root->right, sum - root->val, ans, path);
   }

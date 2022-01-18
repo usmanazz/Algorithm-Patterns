@@ -61,4 +61,7 @@ class SlidingWindowMedian {
 
     return result;
   }
+
+  // Time: O(n*k) - to iterate thru entire arr, and for each subarr, we iterate thru k elements
+  // Space: O(k) - excluding output arr, storing at max k elements at any given time
 };

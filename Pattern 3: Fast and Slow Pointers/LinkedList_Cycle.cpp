@@ -21,7 +21,7 @@ class LinkedListCycle {
     if (head == nullptr)
       return false;
 
-    // initital slow and fast ptrs
+    // initial slow and fast ptrs
     ListNode* slow = head;
     ListNode* fast = head;
 
